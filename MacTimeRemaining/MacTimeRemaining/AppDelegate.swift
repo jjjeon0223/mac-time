@@ -1,6 +1,5 @@
 import Cocoa
 
-@main
 class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
     private var timer: Timer?
@@ -13,14 +12,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Activate the app
-        NSApp.setActivationPolicy(.accessory)
+        print("App launching...")
 
         // Create status item in menu bar
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        statusItem.isVisible = true
+
+        print("Status item created: \(statusItem)")
 
         if let button = statusItem.button {
-            button.title = "Loading..."
+            button.title = "⏰"
+            print("Button created with initial title")
+        } else {
+            print("ERROR: Could not get status item button!")
         }
 
         // Setup menu
@@ -33,6 +37,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             self?.updateStatusBar()
         }
+
+        print("App initialization complete")
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
