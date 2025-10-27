@@ -9,14 +9,12 @@
 /* Begin PBXBuildFile section */
 		A1000001000000000000001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002000000000000001 /* AppDelegate.swift */; };
 		A1000003000000000000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000004000000000000001 /* Assets.xcassets */; };
-		A1000005000000000000001 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1000006000000000000001 /* MainMenu.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A1000000000000000000001 /* MacTimeRemaining.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacTimeRemaining.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1000002000000000000001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1000004000000000000001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A1000006000000000000001 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		A1000007000000000000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1000008000000000000001 /* MacTimeRemaining.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacTimeRemaining.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -45,7 +43,6 @@
 			children = (
 				A1000002000000000000001 /* AppDelegate.swift */,
 				A1000004000000000000001 /* Assets.xcassets */,
-				A1000006000000000000001 /* MainMenu.xib */,
 				A1000007000000000000001 /* Info.plist */,
 				A1000008000000000000001 /* MacTimeRemaining.entitlements */,
 			);
@@ -119,7 +116,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1000003000000000000001 /* Assets.xcassets in Resources */,
-				A1000005000000000000001 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,7 +263,6 @@
 				INFOPLIST_FILE = MacTimeRemaining/Info.plist;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSMainNibFile = MainMenu;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -293,7 +288,6 @@
 				INFOPLIST_FILE = MacTimeRemaining/Info.plist;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSMainNibFile = MainMenu;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

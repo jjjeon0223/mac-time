@@ -13,6 +13,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        // Activate the app
+        NSApp.setActivationPolicy(.accessory)
+
         // Create status item in menu bar
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
@@ -26,13 +29,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Initial update
         updateStatusBar()
 
-        // Update every minute
-        timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { [weak self] _ in
-            self?.updateStatusBar()
-        }
-
-        // Also update every second for smoother percentage updates
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+        // Update every second for accurate display
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             self?.updateStatusBar()
         }
     }
