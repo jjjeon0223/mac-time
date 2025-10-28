@@ -141,58 +141,56 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func createPieChartImage(percentage: Double) -> NSImage {
         let size: CGFloat = 18
-        let image = NSImage(size: NSSize(width: size, height: size))
+        let image = NSImage(size: NSSize(width: size, height: size), flipped: false) { rect in
+            // Create circle path
+            let drawRect = NSRect(x: 1, y: 1, width: size - 2, height: size - 2)
+            let circlePath = NSBezierPath(ovalIn: drawRect)
 
-        image.lockFocus()
+            // Draw background circle (empty/used portion)
+            NSColor.systemGray.withAlphaComponent(0.3).setFill()
+            circlePath.fill()
 
-        // Create circle path
-        let rect = NSRect(x: 1, y: 1, width: size - 2, height: size - 2)
-        let circlePath = NSBezierPath(ovalIn: rect)
+            // Draw filled pie chart (remaining portion)
+            if percentage > 0 {
+                let piePath = NSBezierPath()
+                let center = NSPoint(x: size / 2, y: size / 2)
+                let radius = (size - 2) / 2
 
-        // Draw background circle (empty/used portion)
-        NSColor.systemGray.withAlphaComponent(0.3).setFill()
-        circlePath.fill()
+                // Start angle at 12 o'clock (90 degrees) and go clockwise
+                let startAngle: CGFloat = 90
+                let endAngle = startAngle - CGFloat(percentage * 3.6) // 360 degrees * (percentage / 100)
 
-        // Draw filled pie chart (remaining portion)
-        if percentage > 0 {
-            let piePath = NSBezierPath()
-            let center = NSPoint(x: size / 2, y: size / 2)
-            let radius = (size - 2) / 2
+                piePath.move(to: center)
+                piePath.line(to: NSPoint(x: center.x, y: center.y + radius))
+                piePath.appendArc(
+                    withCenter: center,
+                    radius: radius,
+                    startAngle: startAngle,
+                    endAngle: endAngle,
+                    clockwise: true
+                )
+                piePath.close()
 
-            // Start angle at 12 o'clock (90 degrees) and go clockwise
-            let startAngle: CGFloat = 90
-            let endAngle = startAngle - CGFloat(percentage * 3.6) // 360 degrees * (percentage / 100)
-
-            piePath.move(to: center)
-            piePath.line(to: NSPoint(x: center.x, y: center.y + radius))
-            piePath.appendArc(
-                withCenter: center,
-                radius: radius,
-                startAngle: startAngle,
-                endAngle: endAngle,
-                clockwise: true
-            )
-            piePath.close()
-
-            // Color based on percentage remaining
-            let color: NSColor
-            if percentage > 50 {
-                color = NSColor.systemGreen
-            } else if percentage > 25 {
-                color = NSColor.systemYellow
-            } else {
-                color = NSColor.systemRed
+                // Color based on percentage remaining
+                let color: NSColor
+                if percentage > 50 {
+                    color = NSColor.systemGreen
+                } else if percentage > 25 {
+                    color = NSColor.systemYellow
+                } else {
+                    color = NSColor.systemRed
+                }
+                color.setFill()
+                piePath.fill()
             }
-            color.setFill()
-            piePath.fill()
+
+            // Draw outline
+            NSColor.black.withAlphaComponent(0.3).setStroke()
+            circlePath.lineWidth = 0.5
+            circlePath.stroke()
+
+            return true
         }
-
-        // Draw outline
-        NSColor.black.withAlphaComponent(0.3).setStroke()
-        circlePath.lineWidth = 0.5
-        circlePath.stroke()
-
-        image.unlockFocus()
 
         return image
     }
