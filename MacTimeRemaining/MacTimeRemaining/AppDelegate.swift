@@ -56,7 +56,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(NSMenuItem.separator())
         menu.addItem(withTitle: "Display Mode", action: nil, keyEquivalent: "")
 
-        let timeItem = NSMenuItem(title: "Time Remaining (HH:MM)", action: #selector(setTimeMode), keyEquivalent: "")
+        let timeItem = NSMenuItem(title: "Time Remaining (hrs/mins)", action: #selector(setTimeMode), keyEquivalent: "")
         timeItem.target = self
         timeItem.state = getDisplayMode() == .timeRemaining ? .on : .off
         menu.addItem(timeItem)
@@ -114,7 +114,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         case .timeRemaining:
             let hours = Int(remainingSeconds) / 3600
             let minutes = (Int(remainingSeconds) % 3600) / 60
-            displayText = String(format: "%02d:%02d", hours, minutes)
+
+            let hourText = hours == 1 ? "hr" : "hrs"
+            let minuteText = minutes == 1 ? "min" : "mins"
+
+            if hours > 0 && minutes > 0 {
+                displayText = "\(hours) \(hourText) \(minutes) \(minuteText)"
+            } else if hours > 0 {
+                displayText = "\(hours) \(hourText)"
+            } else {
+                displayText = "\(minutes) \(minuteText)"
+            }
 
         case .percentage:
             displayText = String(format: "%.1f%%", percentageRemaining)
